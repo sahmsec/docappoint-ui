@@ -15,7 +15,7 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
           <div className="w-full md:w-1/2 flex items-center justify-center">
             <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }} className="relative h-[350px] md:h-[450px] w-full max-w-[500px]">
-              <Image src="/doctor-bro.svg" alt="Doctor illustration" fill className="object-contain" priority />
+              <Image src="/doctor-bro.svg" alt="Doctor illustration" fill className="object-cover" priority />
             </motion.div>
           </div>
           <div className="w-full md:w-1/2 text-center md:text-left">
