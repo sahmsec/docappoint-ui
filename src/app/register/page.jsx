@@ -21,7 +21,7 @@ export default function RegisterPage() {
       return;
     }
     if (formData.password !== formData.confirmPassword) {
-      toast.error('Passwords do not match');
+      toast.error('Passwords do not match. Please try again.');
       return;
     }
     try {
