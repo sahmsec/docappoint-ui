@@ -91,11 +91,11 @@ const StyledWrapper = styled.div`
   .card {
     height: 100%;
     border-radius: 40px;
-    background: linear-gradient(135deg, #11281F 0%, #07130E 100%);
+    background: linear-gradient(135deg, #11281F 0%, #050d0a 100%);
     transition: all 0.5s ease-in-out;
     transform-style: preserve-3d;
-    box-shadow: rgba(17, 40, 31, 0) 40px 50px 25px -40px, rgba(17, 40, 31, 0.3) 0px 25px 25px -5px;
-    border: 1px solid rgba(181, 227, 176, 0.3);
+    box-shadow: rgba(17, 40, 31, 0) 40px 50px 25px -40px, rgba(17, 40, 31, 0.4) 0px 25px 25px -5px;
+    border: 1.5px solid rgba(181, 227, 176, 0.45);
     position: relative;
   }
 
@@ -105,7 +105,7 @@ const StyledWrapper = styled.div`
     inset: 8px;
     border-radius: 35px;
     border-top-right-radius: 100%;
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.08) 100%);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.12) 100%);
     transform: translate3d(0px, 0px, 25px);
     border-left: 1px solid rgba(255, 255, 255, 0.2);
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
@@ -121,7 +121,7 @@ const StyledWrapper = styled.div`
     border-radius: 50%;
     overflow: hidden;
     transform: translate3d(0, 0, 35px);
-    border: 2px solid rgba(181, 227, 176, 0.8);
+    border: 2px solid #B5E3B0;
     box-shadow: rgba(17, 40, 31, 0.6) 0px 10px 20px -5px;
     z-index: 10;
     transition: all 0.5s ease-in-out;
@@ -151,7 +151,7 @@ const StyledWrapper = styled.div`
 
   .content .text {
     display: block;
-    color: rgba(221, 241, 216, 0.95); /* neon-green for perfect legibility */
+    color: #B5E3B0; /* highly vibrant neon-green for perfect legibility */
     font-size: 14px;
     margin-top: 6px;
     font-weight: 700;
@@ -167,7 +167,7 @@ const StyledWrapper = styled.div`
   
   .content .details .detail-item {
     font-size: 13px;
-    color: rgba(221, 241, 216, 0.85);
+    color: #ffffff; /* pure white text for maximum readability */
     display: flex;
     align-items: center;
     gap: 6px;
@@ -179,7 +179,7 @@ const StyledWrapper = styled.div`
   }
 
   .content .details .detail-item svg {
-    color: #4E9B63; /* green for better icon visibility */
+    color: #8CE09B; /* vibrant light emerald green for better icon visibility */
     flex-shrink: 0;
   }
 
@@ -236,15 +236,15 @@ const StyledWrapper = styled.div`
   .bottom .info-buttons-container .info-button {
     height: 32px;
     padding: 0 12px;
-    background: rgba(181, 227, 176, 0.1); /* backdrop opacity */
+    background: rgba(181, 227, 176, 0.2); /* increased backdrop opacity */
     backdrop-filter: blur(4px);
     border-radius: 16px;
-    border: 1px solid rgba(181, 227, 176, 0.2); /* border stroke */
+    border: 1px solid rgba(181, 227, 176, 0.4); /* increased border stroke */
     display: flex;
     align-items: center;
     justify-content: center;
     box-shadow: rgba(17, 40, 31, 0.3) 0px 4px 6px -2px;
-    color: #DDF1D8;
+    color: #ffffff; /* pure white text */
     transition: background 0.3s ease, transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
   }
 
