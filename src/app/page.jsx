@@ -857,5 +857,3 @@ export default function HomePage() {
     </>
   );
 }
-
-// TODO: fix scroll on mobile
