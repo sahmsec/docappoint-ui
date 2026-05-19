@@ -2,19 +2,400 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-main: #F4FAF2;
+  --bg-soft: #DDF1D8;
+  --bg-card: #FFFFFF;
+  --primary: #11281F;
+  --primary-hover: #1B3A2D;
+  --accent: #4E9B63;
+  --accent-hover: #3F8252;
+  --success: #008D44;
+  --success-hover: #00753A;
+  --text-main: #111111;
+  --text-secondary: #6B7280;
+  --border: #E5E7EB;
+  --border-hover: #D1D5DB;
+
+  /* Backwards compatibility aliases */
+  --primary-dark: #11281F;
+  --mint: #DDF1D8;
+  --dark: #111111;
+  --card: #FFFFFF;
+  --page-bg: #F4FAF2;
+  --secondary-text: #6B7280;
+  --borders: #E5E7EB;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: system-ui, -apple-system, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html {
+  scroll-behavior: smooth;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #F4FAF2;
+  color: #111111;
+  line-height: 1.6;
 }
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Animation utilities */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-15px); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.8s ease-out forwards;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Glass effect */
+.glass {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, #11281F 0%, #11281F 50%, #11281F 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* Button shine effect */
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.btn-shine:hover::after {
+  left: 100%;
+}
+
+/* Medical pattern background */
+.medical-pattern {
+  background-image: radial-gradient(circle at 1px 1px, rgba(78, 155, 99, 0.1) 1px, transparent 0);
+  background-size: 40px 40px;
+}
+
+/* Continuous Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* 3D Cylinder & Neumorphic Wrapper Styles for Specialized Medical Care */
+.neumorphic-section-custom {
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 20px 0;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 1024px) {
+  .neumorphic-section-custom {
+    border-radius: 50px;
+    background: #EAF7E8;
+    box-shadow: 0 0 20px rgba(17, 40, 31, 0.6),
+                20px 20px 60px #c7d2c5,
+                -20px -20px 60px #ffffff;
+    padding: 60px 40px;
+  }
+}
+
+.service-carousel-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+@keyframes autoRun3d {
+  from {
+    transform: perspective(1200px) rotateX(-8deg) rotateY(-360deg);
+  }
+  to {
+    transform: perspective(1200px) rotateX(-8deg) rotateY(0deg);
+  }
+}
+
+@keyframes animateBrightness {
+  10% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(0.15);
+  }
+  90% {
+    filter: brightness(1);
+  }
+}
+
+.card-3d {
+  position: relative;
+  width: 520px;
+  height: 220px;
+  transform-style: preserve-3d;
+  transform: perspective(1200px) rotateX(-8deg);
+  animation: autoRun3d 28s linear infinite;
+  will-change: transform;
+  display: flex;
+  justify-content: center;
+}
+
+.card-item {
+  position: absolute;
+  width: 130px;
+  height: 182px;
+  background-color: #11281F;
+  border: 1px solid rgba(78, 155, 99, 0.3);
+  border-radius: 0.5rem;
+  top: 50%;
+  left: 50%;
+  transform-origin: center center;
+  animation: animateBrightness 28s linear infinite;
+  transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  will-change: transform, filter;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-item:hover {
+  border-color: rgba(78, 155, 99, 0.6);
+  box-shadow: 0 10px 25px rgba(78, 155, 99, 0.2);
+}
+
+.card-3d:hover {
+  animation-play-state: paused !important;
+}
+
+.card-3d:hover .card-item {
+  animation-play-state: paused !important;
+}
+
+.card-item:nth-child(1) {
+  transform: translate(-50%, -50%) rotateY(0deg) translateZ(390px);
+  animation-delay: -0s;
+}
+.card-item:nth-child(2) {
+  transform: translate(-50%, -50%) rotateY(36deg) translateZ(390px);
+  animation-delay: -2.8s;
+}
+.card-item:nth-child(3) {
+  transform: translate(-50%, -50%) rotateY(72deg) translateZ(390px);
+  animation-delay: -5.6s;
+}
+.card-item:nth-child(4) {
+  transform: translate(-50%, -50%) rotateY(108deg) translateZ(390px);
+  animation-delay: -8.4s;
+}
+.card-item:nth-child(5) {
+  transform: translate(-50%, -50%) rotateY(144deg) translateZ(390px);
+  animation-delay: -11.2s;
+}
+.card-item:nth-child(6) {
+  transform: translate(-50%, -50%) rotateY(180deg) translateZ(390px);
+  animation-delay: -14s;
+}
+.card-item:nth-child(7) {
+  transform: translate(-50%, -50%) rotateY(216deg) translateZ(390px);
+  animation-delay: -16.8s;
+}
+.card-item:nth-child(8) {
+  transform: translate(-50%, -50%) rotateY(252deg) translateZ(390px);
+  animation-delay: -19.6s;
+}
+.card-item:nth-child(9) {
+  transform: translate(-50%, -50%) rotateY(288deg) translateZ(390px);
+  animation-delay: -22.4s;
+}
+.card-item:nth-child(10) {
+  transform: translate(-50%, -50%) rotateY(324deg) translateZ(390px);
+  animation-delay: -25.2s;
+}
+
+.img-wrapper {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.45;
+  transition: opacity 0.3s ease, scale 0.5s ease;
+}
+.card-item:hover .img {
+  opacity: 0.75;
+  scale: 1.05;
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(to top, rgba(11, 24, 19, 0.95) 0%, rgba(17, 40, 31, 0.2) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px 8px;
+  text-align: center;
+}
+.icon-box {
+  margin-bottom: 4px;
+  background: rgba(78, 155, 99, 0.2);
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid rgba(78, 155, 99, 0.35);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.card-item:hover .icon-box {
+  background: rgba(78, 155, 99, 0.35);
+  transform: translateY(-1px);
+}
+.icon-svg {
+  width: 16px;
+  height: 16px;
+  color: #DDF1D8;
+}
+.card-title {
+  font-size: 12px;
+  font-weight: 800;
+  color: #ffffff;
+  margin: 0;
+  letter-spacing: 0.01em;
+}
+.card-details-box {
+  width: 100%;
+  margin-top: 3px;
+}
+.details-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+}
+.details-item {
+  font-size: 9px;
+  color: rgba(221, 241, 216, 0.8);
+  margin: 0;
+  line-height: 1.2;
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-weight: 500;
+}
+.bullet-dot {
+  color: #4E9B63;
+  font-size: 9px;
+}
+
