@@ -510,5 +510,6 @@ export default function DashboardPage() {
         )}
       </AnimatePresence>
     </div>
+    </>
   );
 }
