@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, LogOut, User, Calendar, Home, LayoutDashboard } from 'lucide-react';
-import Image from 'next/image';
 import Logo from '@/components/Logo';
 import AnimatedButton from '@/components/AnimatedButton';
+import UserAvatar from '@/components/UserAvatar';
 
 export default function Navbar() {
   const { user, logout } = useAuth();
@@ -55,17 +55,7 @@ export default function Navbar() {
             {user ? (
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#DDF1D8]/30 border border-[#E5E7EB]">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt={user.name}
-                      className="w-8 h-8 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 rounded-full bg-[#11281F] flex items-center justify-center">
-                      <User className="w-4 h-4 text-white" />
-                    </div>
-                  )}
+                  <UserAvatar src={user.photoURL} name={user.name} size="sm" />
                   <span className="text-sm font-medium text-[#11281F]">{user.name}</span>
                 </div>
                 <motion.button
@@ -128,13 +118,7 @@ export default function Navbar() {
               {user ? (
                 <>
                   <div className="flex items-center gap-3 px-4 py-3">
-                    {user.photoURL ? (
-                      <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
-                    ) : (
-                      <div className="w-8 h-8 rounded-full bg-[#11281F] flex items-center justify-center">
-                        <User className="w-4 h-4 text-white" />
-                      </div>
-                    )}
+                    <UserAvatar src={user.photoURL} name={user.name} size="sm" />
                     <span className="font-medium text-[#11281F]">{user.name}</span>
                   </div>
                   <button

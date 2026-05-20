@@ -22,6 +22,7 @@ import {
 import toast from 'react-hot-toast';
 import Loader from '@/components/Loader';
 import Dashboard3DCard from '@/components/Dashboard3DCard';
+import UserAvatar from '@/components/UserAvatar';
 
 export default function DashboardPage() {
   const { user, loading: authLoading, updateProfile } = useAuth();
@@ -276,17 +277,13 @@ export default function DashboardPage() {
             <div className="max-w-2xl mx-auto">
               <div className="bg-white border border-[#EAF7E8] rounded-[32px] p-8 shadow-[0_20px_50px_rgba(78,155,99,0.06)]">
                 <div className="flex items-center gap-6 mb-8 pb-8 border-b border-slate-100">
-                  {user.photoURL ? (
-                    <img
-                      src={user.photoURL}
-                      alt={user.name}
-                      className="w-24 h-24 rounded-full object-cover border-4 border-[#B5E3B0]/40 shadow-md"
-                    />
-                  ) : (
-                    <div className="w-24 h-24 rounded-full bg-gradient-to-tr from-[#4E9B63] to-[#B5E3B0] flex items-center justify-center border-4 border-[#B5E3B0]/40 shadow-md">
-                      <User className="w-10 h-10 text-white" />
-                    </div>
-                  )}
+                  <UserAvatar
+                    src={user.photoURL}
+                    name={user.name}
+                    size="lg"
+                    className="border-4 border-[#B5E3B0]/40 shadow-md"
+                    fallbackClassName="bg-gradient-to-tr from-[#4E9B63] to-[#B5E3B0] border-4 border-[#B5E3B0]/40 shadow-md"
+                  />
                   <div>
                     <h2 className="text-2xl font-bold text-[#11281F]">{user.name}</h2>
                     <p className="text-slate-500">{user.email}</p>

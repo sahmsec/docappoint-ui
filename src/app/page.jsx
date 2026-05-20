@@ -94,7 +94,7 @@ function HeroSection() {
                     whileInView={{ y: "0%" }}
                     viewport={{ once: false }}
                     transition={{ duration: 0.7, delay: 0.2, ease: "easeOut" }}
-                    className="flex items-center gap-2 lg:gap-3 flex-nowrap whitespace-nowrap mb-1"
+                    className="mb-1 flex max-w-full flex-wrap items-center gap-2 lg:gap-3 sm:flex-nowrap sm:whitespace-nowrap"
                   >
                     <span className="text-[#B5E3B0]">Medical</span>
                     <div className="inline-flex -space-x-3 md:-space-x-4">
@@ -147,7 +147,7 @@ function HeroSection() {
                   viewport={{ once: false }}
                   transition={{ duration: 0.7, delay: 0.5, ease: "easeOut" }}
                 >
-                  <AnimatedButton text="Book an Appointment" href="/doctors" variant="light" />
+                  <AnimatedButton text="Book an Appointment" href="/appointments" variant="light" />
                 </motion.div>
               </div>
             </div>
@@ -162,27 +162,7 @@ function TopDoctorsSection() {
   const [doctors, setDoctors] = useState([]);
   const [loading, setLoading] = useState(true);
   const [errorMsg, setErrorMsg] = useState('');
-  
-  const swiperRef = useRef(null);
-  const resumeTimeoutRef = useRef(null);
-
-  const handlePointerDown = () => {
-    if (swiperRef.current && swiperRef.current.autoplay) {
-      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-      swiperRef.current.autoplay.stop();
-    }
-  };
-
-  const handlePointerUpOrLeave = () => {
-    if (swiperRef.current && swiperRef.current.autoplay) {
-      if (resumeTimeoutRef.current) clearTimeout(resumeTimeoutRef.current);
-      resumeTimeoutRef.current = setTimeout(() => {
-        if (swiperRef.current && swiperRef.current.autoplay) {
-          swiperRef.current.autoplay.start();
-        }
-      }, 2000);
-    }
-  };
+  const [activeDoctorIndex, setActiveDoctorIndex] = useState(0);
 
   useEffect(() => {
     const fetchDoctors = async () => {
@@ -202,6 +182,18 @@ function TopDoctorsSection() {
     };
     fetchDoctors();
   }, []);
+
+  useEffect(() => {
+    if (doctors.length <= 1) {
+      return undefined;
+    }
+
+    const intervalId = setInterval(() => {
+      setActiveDoctorIndex((currentIndex) => (currentIndex + 1) % doctors.length);
+    }, 3200);
+
+    return () => clearInterval(intervalId);
+  }, [doctors]);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -289,41 +281,48 @@ function TopDoctorsSection() {
               ))}
             </motion.div>
 
-            {/* Mobile & Tablet Swiper (Hidden on large screens) */}
+            {/* Mobile & Tablet Fixed Stage (Hidden on large screens) */}
             <motion.div 
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false }}
               transition={{ duration: 0.6, ease: "easeOut" }}
-              className="block lg:hidden w-full px-2"
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUpOrLeave}
-              onPointerLeave={handlePointerUpOrLeave}
-              onPointerCancel={handlePointerUpOrLeave}
+              className="block w-full lg:hidden"
             >
-              <Swiper
-                onSwiper={(swiper) => { swiperRef.current = swiper; }}
-                modules={[Autoplay]}
-                spaceBetween={24}
-                slidesPerView={1}
-                breakpoints={{
-                  768: {
-                    slidesPerView: 2,
-                  }
-                }}
-                loop={true}
-                autoplay={{
-                  delay: 2500,
-                  disableOnInteraction: true,
-                }}
-                className="w-full py-6 !overflow-visible"
-              >
-                {doctors.map((doctor) => (
-                  <SwiperSlide key={doctor._id} className="flex justify-center">
-                    <DoctorCard doctor={doctor} />
-                  </SwiperSlide>
-                ))}
-              </Swiper>
+              <div className="mx-auto flex max-w-[360px] flex-col items-center px-4">
+                <div className="relative h-[360px] w-full overflow-hidden rounded-[40px]">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={doctors[activeDoctorIndex]?._id}
+                      initial={{ opacity: 0, scale: 0.985 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.985 }}
+                      transition={{ duration: 0.35, ease: 'easeInOut' }}
+                      className="absolute inset-0 flex items-center justify-center"
+                    >
+                      <DoctorCard doctor={doctors[activeDoctorIndex]} />
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {doctors.length > 1 && (
+                  <div className="mt-6 flex items-center gap-2">
+                    {doctors.map((doctor, index) => (
+                      <button
+                        key={doctor._id}
+                        type="button"
+                        onClick={() => setActiveDoctorIndex(index)}
+                        aria-label={`Show doctor ${index + 1}`}
+                        className={`h-2.5 rounded-full transition-all duration-300 ${
+                          index === activeDoctorIndex
+                            ? 'w-8 bg-[#11281F]'
+                            : 'w-2.5 bg-[#11281F]/20 hover:bg-[#11281F]/40'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
             </motion.div>
           </>
         )}
@@ -740,7 +739,7 @@ function WhyChooseUsSection() {
               delay: 3000,
               disableOnInteraction: false,
             }}
-            className="w-full py-4 !overflow-visible"
+            className="w-full overflow-hidden py-4"
           >
             {features.map((feature) => (
               <SwiperSlide key={feature.title} className="flex justify-center">

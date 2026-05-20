@@ -5,6 +5,14 @@ import { motion } from 'framer-motion';
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
+  const quickLinks = [
+    { label: 'Home', href: '/' },
+    { label: 'All Appointments', href: '/appointments' },
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Login', href: '/login' },
+    { label: 'Register', href: '/register' },
+  ];
+
   return (
     <footer className="bg-[#11281F] text-[#F7F7F4]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -38,13 +46,13 @@ export default function Footer() {
           >
             <h3 className="text-lg font-bold mb-6 text-[#FFFFFF]">Quick Links</h3>
             <ul className="space-y-3">
-              {['Home', 'All Appointments', 'Dashboard', 'Login', 'Register'].map((item) => (
-                <li key={item}>
+              {quickLinks.map((item) => (
+                <li key={item.label}>
                   <Link
-                    href={item === 'Home' ? '/' : `/${item.toLowerCase().replace(' ', '-')}`}
+                    href={item.href}
                     className="text-[#F7F7F4]/70 hover:text-[#DDF1D8] transition-colors text-[15px]"
                   >
-                    {item}
+                    {item.label}
                   </Link>
                 </li>
               ))}

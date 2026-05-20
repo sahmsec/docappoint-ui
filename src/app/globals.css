@@ -37,6 +37,7 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 body {
@@ -44,6 +45,7 @@ body {
   background: #F4FAF2;
   color: #111111;
   line-height: 1.6;
+  overflow-x: clip;
 }
 
 /* Custom scrollbar */
