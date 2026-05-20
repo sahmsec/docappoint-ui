@@ -2,7 +2,6 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authClient } from './auth-client';
-import api from './axios';
 
 const AuthContext = createContext();
 
@@ -14,38 +13,22 @@ export function AuthProvider({ children }) {
   const { data: session, isPending } = authClient.useSession();
 
   useEffect(() => {
-    if (!isPending) {
-      if (session?.user) {
-        // Map Better Auth user shape to the shape the app expects
-        setUser({
-          _id: session.user.id,
-          name: session.user.name,
-          email: session.user.email,
-          photoURL: session.user.image || '',
-        });
-        
-        // Clean up any legacy JWT tokens to prevent conflicts
-        if (typeof window !== 'undefined') {
-          localStorage.removeItem('token');
-        }
-      } else {
-        // Fallback: try old JWT token from localStorage (for backwards compat)
-        const token = localStorage.getItem('token');
-        if (token) {
-          api.get('/api/auth/me')
-            .then(({ data }) => {
-              if (data.success) setUser(data.data);
-            })
-            .catch(() => {
-              localStorage.removeItem('token');
-            })
-            .finally(() => setLoading(false));
-          return;
-        }
-        setUser(null);
-      }
-      setLoading(false);
+    if (isPending) {
+      return;
     }
+
+    if (session?.user) {
+      setUser({
+        _id: session.user.id,
+        name: session.user.name,
+        email: session.user.email,
+        photoURL: session.user.image || '',
+      });
+    } else {
+      setUser(null);
+    }
+
+    setLoading(false);
   }, [session, isPending]);
 
   // Email + Password Registration via Better Auth
@@ -64,9 +47,6 @@ export function AuthProvider({ children }) {
 
   // Email + Password Login via Better Auth
   const login = async (email, password) => {
-    // Clear any old JWT tokens
-    localStorage.removeItem('token');
-
     const result = await authClient.signIn.email({ email, password });
     if (result.error) {
       return { success: false, message: result.error.message || 'Login failed' };
@@ -96,8 +76,6 @@ export function AuthProvider({ children }) {
 
   // Logout via Better Auth
   const logout = async () => {
-    // Also clear any legacy JWT
-    localStorage.removeItem('token');
     await authClient.signOut();
     setUser(null);
     window.location.href = '/';

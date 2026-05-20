@@ -10,7 +10,7 @@
 
 - **Browse Top Doctors** — Discover and view profiles of highly-rated medical professionals with detailed information
 - **Smart Search & Sorting** — Search doctors by name and sort by rating or consultation fee
-- **Secure Authentication** — JWT-based auth with email/password login and Google OAuth support
+- **Secure Authentication** — Better Auth email/password login with Google OAuth support
 - **Easy Booking** — Book appointments through an intuitive modal form with real-time validation
 - **Appointment Management** — View, update, and delete your bookings from a personalized dashboard
 - **Profile Management** — Update your name and profile photo instantly
@@ -21,7 +21,7 @@
 ## Tech Stack
 
 - **Frontend:** Next.js 15 (App Router), React 19, Tailwind CSS, Framer Motion, Swiper.js
-- **Backend:** Express.js, MongoDB, JWT Authentication
+- **Backend:** Express.js, MongoDB, Better Auth session cookies
 - **Deployment:** Vercel (Client), Render (Server)
 
 ## Getting Started
@@ -64,8 +64,14 @@
 ## Authentication
 
 - Password must contain at least 1 uppercase letter, 1 lowercase letter, and be minimum 6 characters
-- JWT tokens stored in localStorage with Bearer token API requests
-- Social login via Google OAuth
+- Better Auth manages session cookies across the client and server
+- Social login uses Google OAuth through the backend auth callback
+
+## Production Setup
+
+- `NEXT_PUBLIC_SERVER_URL=https://your-render-service.onrender.com`
+- Render `CLIENT_URL` must exactly match your Vercel production domain
+- Google OAuth redirect URI must point to `https://your-render-service.onrender.com/api/auth/callback/google`
 
 ## License
 
