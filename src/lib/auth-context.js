@@ -67,30 +67,15 @@ export function AuthProvider({ children }) {
     const absoluteCallbackURL = callbackURL?.startsWith('http')
       ? callbackURL
       : `${window.location.origin}${callbackURL || '/'}`;
-    const errorCallbackURL = window.location.href;
-    const authBaseURL = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000') + '/api/auth';
 
-    const form = document.createElement('form');
-    form.method = 'POST';
-    form.action = `${authBaseURL}/sign-in/social`;
-    form.style.display = 'none';
-
-    const fields = {
+    const result = await authClient.signIn.social({
       provider: 'google',
       callbackURL: absoluteCallbackURL,
-      errorCallbackURL,
-    };
-
-    Object.entries(fields).forEach(([name, value]) => {
-      const input = document.createElement('input');
-      input.type = 'hidden';
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
     });
 
-    document.body.appendChild(form);
-    form.submit();
+    if (result.error) {
+      throw new Error(result.error.message || 'Google login failed');
+    }
   };
 
   // Logout via Better Auth
