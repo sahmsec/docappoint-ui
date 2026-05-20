@@ -64,14 +64,33 @@ export function AuthProvider({ children }) {
 
   // Google OAuth Login via Better Auth (redirects to Google)
   const googleLogin = async (callbackURL) => {
-    const absoluteCallbackURL = callbackURL?.startsWith('http') 
-      ? callbackURL 
+    const absoluteCallbackURL = callbackURL?.startsWith('http')
+      ? callbackURL
       : `${window.location.origin}${callbackURL || '/'}`;
+    const errorCallbackURL = window.location.href;
+    const authBaseURL = (process.env.NEXT_PUBLIC_SERVER_URL || 'http://localhost:5000') + '/api/auth';
 
-    await authClient.signIn.social({
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = `${authBaseURL}/sign-in/social`;
+    form.style.display = 'none';
+
+    const fields = {
       provider: 'google',
       callbackURL: absoluteCallbackURL,
+      errorCallbackURL,
+    };
+
+    Object.entries(fields).forEach(([name, value]) => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
     });
+
+    document.body.appendChild(form);
+    form.submit();
   };
 
   // Logout via Better Auth
