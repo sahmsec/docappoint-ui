@@ -19,7 +19,7 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [passwordError, setPasswordError] = useState('');
-  const { register, user } = useAuth();
+  const { register, user, googleLogin } = useAuth();
   const router = useRouter();
 
   const [isInitialLoad, setIsInitialLoad] = useState(true);
@@ -75,8 +75,12 @@ export default function RegisterPage() {
     }
   };
 
-  const handleGoogleSignup = () => {
-    toast.error('Google OAuth requires setup. Please use email registration for now.');
+  const handleGoogleSignup = async () => {
+    try {
+      await googleLogin('/');
+    } catch (error) {
+      toast.error(error.message || 'Google signup failed. Please try again.');
+    }
   };
 
   return (

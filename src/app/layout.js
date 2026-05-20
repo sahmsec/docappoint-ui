@@ -4,6 +4,7 @@ import { AuthProvider } from '@/lib/auth-context';
 import { Toaster } from 'react-hot-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.variable} font-sans`}>
+        <ScrollToTop />
         <AuthProvider>
           <Navbar />
           <main className="min-h-screen">

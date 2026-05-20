@@ -277,11 +277,9 @@ export default function DashboardPage() {
               <div className="bg-white border border-[#EAF7E8] rounded-[32px] p-8 shadow-[0_20px_50px_rgba(78,155,99,0.06)]">
                 <div className="flex items-center gap-6 mb-8 pb-8 border-b border-slate-100">
                   {user.photoURL ? (
-                    <Image
+                    <img
                       src={user.photoURL}
                       alt={user.name}
-                      width={100}
-                      height={100}
                       className="w-24 h-24 rounded-full object-cover border-4 border-[#B5E3B0]/40 shadow-md"
                     />
                   ) : (

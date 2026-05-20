@@ -16,7 +16,7 @@ function LoginContent() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const { login, user } = useAuth();
+  const { login, user, googleLogin } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
   const redirect = searchParams.get('redirect') || '/';
@@ -58,9 +58,12 @@ function LoginContent() {
     }
   };
 
-  const handleGoogleLogin = () => {
-    // For demo purposes - in production, implement actual Google OAuth
-    toast.error('Google OAuth requires setup. Please use email login for now.');
+  const handleGoogleLogin = async () => {
+    try {
+      await googleLogin(redirect);
+    } catch (error) {
+      toast.error(error.message || 'Google login failed. Please try again.');
+    }
   };
 
   return (

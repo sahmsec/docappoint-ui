@@ -56,11 +56,9 @@ export default function Navbar() {
               <div className="flex items-center gap-3">
                 <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-[#DDF1D8]/30 border border-[#E5E7EB]">
                   {user.photoURL ? (
-                    <Image
+                    <img
                       src={user.photoURL}
                       alt={user.name}
-                      width={32}
-                      height={32}
                       className="w-8 h-8 rounded-full object-cover"
                     />
                   ) : (
@@ -131,7 +129,7 @@ export default function Navbar() {
                 <>
                   <div className="flex items-center gap-3 px-4 py-3">
                     {user.photoURL ? (
-                      <Image src={user.photoURL} alt={user.name} width={32} height={32} className="w-8 h-8 rounded-full object-cover" />
+                      <img src={user.photoURL} alt={user.name} className="w-8 h-8 rounded-full object-cover" />
                     ) : (
                       <div className="w-8 h-8 rounded-full bg-[#11281F] flex items-center justify-center">
                         <User className="w-4 h-4 text-white" />
