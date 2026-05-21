@@ -26,7 +26,7 @@ import Loader from '../../../components/Loader';
 export default function DoctorDetailsPage() {
   const { id } = useParams();
   const router = useRouter();
-  const { user } = useAuth();
+  const { user, jwtToken } = useAuth();
   const [doctor, setDoctor] = useState(null);
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -106,6 +106,8 @@ export default function DoctorDetailsPage() {
         doctorId: doctor._id,
         doctorName: doctor.name,
         ...bookingData,
+      }, {
+        headers: { Authorization: `Bearer ${jwtToken}` }
       });
 
       if (data.success) {

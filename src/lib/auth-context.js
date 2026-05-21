@@ -2,12 +2,15 @@
 
 import { createContext, useContext, useState, useEffect } from 'react';
 import { authClient } from './auth-client';
+import api from './axios';
 
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+
+  const [jwtToken, setJwtToken] = useState(null);
 
   // Use Better Auth's built-in useSession hook for reactive session state
   const { data: session, isPending } = authClient.useSession();
@@ -24,8 +27,21 @@ export function AuthProvider({ children }) {
         email: session.user.email,
         photoURL: session.user.image || '',
       });
+      
+      // Fetch JWT token using the /api/auth/token endpoint
+      api.get('/api/auth/token')
+        .then(res => {
+          if (res.data?.token) {
+            setJwtToken(res.data.token);
+          } else if (res.token) {
+            setJwtToken(res.token);
+          }
+        })
+        .catch(err => console.error('Error fetching JWT:', err));
+        
     } else {
       setUser(null);
+      setJwtToken(null);
     }
 
     setLoading(false);
@@ -107,7 +123,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading: loading || isPending, login, register, googleLogin, logout, updateProfile }}>
+    <AuthContext.Provider value={{ user, jwtToken, loading: loading || isPending, login, register, googleLogin, logout, updateProfile }}>
       {children}
     </AuthContext.Provider>
   );

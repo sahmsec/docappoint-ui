@@ -25,7 +25,7 @@ import Dashboard3DCard from '@/components/Dashboard3DCard';
 import UserAvatar from '@/components/UserAvatar';
 
 export default function DashboardPage() {
-  const { user, loading: authLoading, updateProfile } = useAuth();
+  const { user, jwtToken, loading: authLoading, updateProfile } = useAuth();
   const router = useRouter();
   const [activeTab, setActiveTab] = useState('bookings');
   const [bookings, setBookings] = useState([]);
@@ -83,7 +83,9 @@ export default function DashboardPage() {
     if (!confirm('Are you sure you want to delete this appointment?')) return;
 
     try {
-      const { data } = await api.delete(`/api/appointments/${id}`);
+      const { data } = await api.delete(`/api/appointments/${id}`, {
+        headers: { Authorization: `Bearer ${jwtToken}` }
+      });
       if (data.success) {
         setBookings(bookings.filter(b => b._id !== id));
         toast.success('Appointment deleted successfully!');

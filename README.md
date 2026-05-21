@@ -121,7 +121,8 @@ src/
 ## Authentication
 
 - Passwords require at least **1 uppercase**, **1 lowercase**, and a **minimum of 6 characters**
-- Better Auth manages session cookies across client and server
+- Better Auth manages session cookies globally across client and server
+- **JWT Authorization**: A stateless JSON Web Token (JWT) is fetched dynamically and attached to the `Authorization: Bearer` header for sensitive booking actions (adding/deleting appointments)
 - Google OAuth login is handled through the backend auth callback
 
 ## Production Setup
