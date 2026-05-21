@@ -13,6 +13,8 @@
 - **Secure Authentication** — Better Auth email/password login with Google OAuth support
 - **Easy Booking** — Book appointments through an intuitive modal form with real-time validation
 - **Appointment Management** — View, update, and delete your bookings from a personalized dashboard
+- **Patient Reviews** — Read and write verified reviews for doctors after completing an appointment
+- **Theme Toggle** — Switch between Light and Dark modes for optimal viewing
 - **Profile Management** — Update your name and profile photo instantly
 - **Responsive Design** — Fully optimized for mobile, tablet, and desktop devices
 - **Animated UI** — Smooth Framer Motion animations with a modern Medinest-inspired healthcare aesthetic

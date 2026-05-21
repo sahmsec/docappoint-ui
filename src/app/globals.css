@@ -27,6 +27,73 @@
   --page-bg: #F4FAF2;
   --secondary-text: #6B7280;
   --borders: #E5E7EB;
+
+  /* Hero Section Variables (Light Theme) */
+  --hero-bg: radial-gradient(circle at 10% 20%, rgba(221, 241, 216, 0.8) 0%, rgba(244, 250, 242, 1) 40%, rgba(200, 230, 200, 0.4) 90%), linear-gradient(135deg, #F4FAF2 0%, #EAF7E8 50%, #DDF1D8 100%);
+  --hero-title: #11281F;
+  --hero-text: #4E6050;
+  --hero-badge-bg: rgba(78, 155, 99, 0.08);
+  --hero-badge-border: rgba(78, 155, 99, 0.15);
+  --hero-badge-text: #4E9B63;
+  --hero-highlight: #4E9B63;
+  
+  /* Footer Variables (Light Theme) */
+  --footer-bg: #EAF7E8;
+  --footer-text: #2A3F33;
+  --footer-text-secondary: rgba(17, 40, 31, 0.65);
+  --footer-title: #11281F;
+  --footer-border: rgba(17, 40, 31, 0.15);
+  --footer-icon-bg: rgba(78, 155, 99, 0.08);
+  --footer-icon-hover-bg: rgba(78, 155, 99, 0.15);
+
+  --navbar-bg: #F4FAF2;
+
+}
+
+[data-theme="dark"] {
+  --bg-main: #0B1410;
+  --bg-soft: #11281F;
+  --bg-card: #141A17;
+  --primary: #DDF1D8;
+  --primary-hover: #F4FAF2;
+  --accent: #4E9B63;
+  --accent-hover: #60B876;
+  --success: #008D44;
+  --success-hover: #00B056;
+  --text-main: #F4FAF2;
+  --text-secondary: #A0AAB2;
+  --border: #2A3F33;
+  --border-hover: #3A5A48;
+
+  /* Backwards compatibility aliases */
+  --primary-dark: #DDF1D8;
+  --mint: #11281F;
+  --dark: #F4FAF2;
+  --card: #141A17;
+  --page-bg: #0B1410;
+  --secondary-text: #A0AAB2;
+  --borders: #2A3F33;
+
+  /* Hero Section Variables (Dark Theme) */
+  --hero-bg: radial-gradient(circle at 80% 20%, rgba(42, 63, 51, 0.4) 0%, rgba(11, 20, 16, 1) 60%), linear-gradient(135deg, #11281F 0%, #0D1C16 50%, #14261F 100%);
+  --hero-title: #FFFFFF;
+  --hero-text: #A0AAB2;
+  --hero-badge-bg: rgba(255, 255, 255, 0.06);
+  --hero-badge-border: rgba(255, 255, 255, 0.08);
+  --hero-badge-text: #B5E3B0;
+  --hero-highlight: #B5E3B0;
+
+  /* Footer Variables (Dark Theme) */
+  --footer-bg: #141A17;
+  --footer-text: #F4FAF2;
+  --footer-text-secondary: rgba(244, 250, 242, 0.6);
+  --footer-title: #FFFFFF;
+  --footer-border: rgba(244, 250, 242, 0.08);
+  --footer-icon-bg: rgba(255, 255, 255, 0.06);
+  --footer-icon-hover-bg: rgba(255, 255, 255, 0.12);
+
+  --navbar-bg: #111A16; /* Dark ash green */
+
 }
 
 * {
@@ -42,10 +109,11 @@ html {
 
 body {
   font-family: 'Inter', system-ui, sans-serif;
-  background: #F4FAF2;
-  color: #111111;
+  background: var(--bg-main);
+  color: var(--text-main);
   line-height: 1.6;
   overflow-x: clip;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom scrollbar */
@@ -54,16 +122,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: var(--bg-main);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--border);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--border-hover);
 }
 
 /* Animation utilities */
@@ -124,9 +192,15 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
+[data-theme="dark"] .glass {
+  background: rgba(20, 26, 23, 0.6);
+  border: 1px solid rgba(78, 155, 99, 0.15);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+}
+
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #11281F 0%, #11281F 50%, #11281F 100%);
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary) 50%, var(--primary) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -202,12 +276,18 @@ body {
 @media (min-width: 1024px) {
   .neumorphic-section-custom {
     border-radius: 50px;
-    background: #EAF7E8;
+    background: var(--bg-soft);
     box-shadow: 0 0 20px rgba(17, 40, 31, 0.6),
                 20px 20px 60px #c7d2c5,
                 -20px -20px 60px #ffffff;
     padding: 60px 40px;
   }
+}
+
+[data-theme="dark"] .neumorphic-section-custom {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4),
+              20px 20px 60px rgba(0, 0, 0, 0.3),
+              -20px -20px 60px rgba(78, 155, 99, 0.05);
 }
 
 .service-carousel-container {
@@ -254,7 +334,7 @@ body {
   position: absolute;
   width: 130px;
   height: 182px;
-  background-color: #11281F;
+  background-color: var(--primary);
   border: 1px solid rgba(78, 155, 99, 0.3);
   border-radius: 0.5rem;
   top: 50%;

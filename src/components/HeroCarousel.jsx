@@ -27,8 +27,8 @@ const HeroCarousel = () => {
     fetchDoctors();
   }, []);
 
-  if (errorMsg) return <div className="w-full h-full flex flex-col items-center justify-center text-red-500 font-bold z-50 bg-white p-4">API Error: {errorMsg}</div>;
-  if (loading) return <div className="w-full h-full flex items-center justify-center text-[#11281F] font-medium animate-pulse">Loading top doctors...</div>;
+  if (errorMsg) return <div className="w-full h-full flex flex-col items-center justify-center text-red-500 font-bold z-50 bg-bg-card p-4">API Error: {errorMsg}</div>;
+  if (loading) return <div className="w-full h-full flex items-center justify-center text-primary font-medium animate-pulse">Loading top doctors...</div>;
   if (!doctors.length) return null;
 
   const quantity = doctors.length;

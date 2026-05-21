@@ -5,58 +5,30 @@ import { motion } from 'framer-motion';
 import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Footer() {
-  const quickLinks = [
-    { label: 'Home', href: '/' },
-    { label: 'All Appointments', href: '/appointments' },
-    { label: 'Dashboard', href: '/dashboard' },
-    { label: 'Login', href: '/login' },
-    { label: 'Register', href: '/register' },
-  ];
-
   return (
-    <footer className="bg-[#11281F] text-[#F7F7F4]">
+    <footer className="bg-footer-bg text-footer-text border-t border-footer-border/50 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+        {/* Redesigned to a cleaner 3-column layout */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12">
           {/* Brand */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="md:col-span-12 lg:col-span-5 lg:pr-12"
           >
             <Link href="/" className="flex items-center gap-2 mb-6">
-              <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-[#DDF1D8]">
+              <svg viewBox="0 0 24 24" fill="currentColor" className="w-8 h-8 text-accent">
                 <path d="M14 2h-4a1 1 0 00-1 1v7H2a1 1 0 00-1 1v4a1 1 0 001 1h7v7a1 1 0 001 1h4a1 1 0 001-1v-7h7a1 1 0 001-1v-4a1 1 0 00-1-1h-7V3a1 1 0 00-1-1z" />
               </svg>
-              <span className="text-2xl font-extrabold tracking-tight text-[#FFFFFF]">
+              <span className="text-2xl font-extrabold tracking-tight text-footer-title">
                 DocAppoint
               </span>
             </Link>
-            <p className="text-[#F7F7F4]/70 text-[15px] leading-relaxed">
+            <p className="text-footer-text-secondary text-[15px] leading-relaxed">
               Your trusted healthcare companion. Book appointments with top-rated doctors easily and securely.
             </p>
-          </motion.div>
-
-          {/* Quick Links */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            <h3 className="text-lg font-bold mb-6 text-[#FFFFFF]">Quick Links</h3>
-            <ul className="space-y-3">
-              {quickLinks.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.href}
-                    className="text-[#F7F7F4]/70 hover:text-[#DDF1D8] transition-colors text-[15px]"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </motion.div>
 
           {/* Contact */}
@@ -64,25 +36,26 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="md:col-span-6 lg:col-span-4"
           >
-            <h3 className="text-lg font-bold mb-6 text-[#FFFFFF]">Contact Us</h3>
+            <h3 className="text-lg font-bold mb-6 text-footer-title">Contact Us</h3>
             <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-[#F7F7F4]/70 text-[15px]">
-                <div className="w-8 h-8 rounded-full bg-[#DDF1D8]/10 flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-4 h-4 text-[#DDF1D8]" />
+              <li className="flex items-center gap-3 text-footer-text-secondary text-[15px]">
+                <div className="w-8 h-8 rounded-full bg-footer-icon-bg flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                  <Phone className="w-4 h-4 text-accent" />
                 </div>
                 +880 1234-567890
               </li>
-              <li className="flex items-center gap-3 text-[#F7F7F4]/70 text-[15px]">
-                <div className="w-8 h-8 rounded-full bg-[#DDF1D8]/10 flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-4 h-4 text-[#DDF1D8]" />
+              <li className="flex items-center gap-3 text-footer-text-secondary text-[15px]">
+                <div className="w-8 h-8 rounded-full bg-footer-icon-bg flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                  <Mail className="w-4 h-4 text-accent" />
                 </div>
                 support@docappoint.com
               </li>
-              <li className="flex items-center gap-3 text-[#F7F7F4]/70 text-[15px]">
-                <div className="w-8 h-8 rounded-full bg-[#DDF1D8]/10 flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-4 h-4 text-[#DDF1D8]" />
+              <li className="flex items-center gap-3 text-footer-text-secondary text-[15px]">
+                <div className="w-8 h-8 rounded-full bg-footer-icon-bg flex items-center justify-center flex-shrink-0 transition-colors duration-300">
+                  <MapPin className="w-4 h-4 text-accent" />
                 </div>
                 Dhaka, Bangladesh
               </li>
@@ -94,9 +67,10 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="md:col-span-6 lg:col-span-3"
           >
-            <h3 className="text-lg font-bold mb-6 text-[#FFFFFF]">Follow Us</h3>
+            <h3 className="text-lg font-bold mb-6 text-footer-title">Follow Us</h3>
             <div className="flex gap-3">
               {[
                 { name: 'X', icon: 'M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z' },
@@ -106,7 +80,7 @@ export default function Footer() {
                 <a
                   key={social.name}
                   href="#"
-                  className="w-10 h-10 rounded-lg bg-[#F7F7F4]/10 hover:bg-[#DDF1D8] hover:text-[#11281F] flex items-center justify-center transition-colors text-[#F7F7F4]"
+                  className="w-10 h-10 rounded-lg bg-footer-icon-bg hover:bg-footer-icon-hover-bg flex items-center justify-center transition-colors duration-300 text-footer-text"
                   aria-label={social.name}
                 >
                   <svg className="w-5 h-5 fill-current" viewBox="0 0 24 24">
@@ -118,12 +92,9 @@ export default function Footer() {
           </motion.div>
         </div>
 
-        <div className="border-t border-[#F7F7F4]/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[#F7F7F4]/50 text-sm">
+        <div className="border-t border-footer-border mt-12 pt-8">
+          <p className="text-footer-text-secondary/70 text-sm text-left">
             © 2026 DocAppoint. All rights reserved.
-          </p>
-          <p className="text-[#F7F7F4]/50 text-sm flex items-center gap-1.5">
-            Made with <Heart className="w-4 h-4 text-[#DDF1D8] fill-[#DDF1D8]" /> for better healthcare
           </p>
         </div>
       </div>

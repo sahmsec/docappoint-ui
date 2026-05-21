@@ -91,15 +91,15 @@ export default function RegisterPage() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] bg-[#11281F] flex items-center justify-center"
+            className="fixed inset-0 z-[9999] bg-bg-main flex items-center justify-center"
           >
             <Loader />
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="min-h-screen flex items-center justify-center py-12 px-4 bg-[#11281F] relative overflow-hidden">
+      <div className="min-h-screen flex items-center justify-center py-12 px-4 relative overflow-hidden transition-all duration-300" style={{ background: 'var(--hero-bg)' }}>
         <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[50%] bg-[#B5E3B0]/15 rounded-full filter blur-[120px] pointer-events-none" />
-        <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[50%] bg-[#4E9B63]/10 rounded-full filter blur-[120px] pointer-events-none" />
+        <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[50%] bg-accent/10 rounded-full filter blur-[120px] pointer-events-none" />
         
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -114,20 +114,23 @@ export default function RegisterPage() {
           </div>
 
           {/* Card */}
-          <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-[32px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.2)]">
-            <h1 className="text-2xl font-bold text-white text-center mb-2">Create Account</h1>
-            <p className="text-[#DDF1D8]/80 text-center mb-6">Join DocAppoint today</p>
+          <div className="bg-gradient-to-br from-bg-card/90 to-bg-main/90 backdrop-blur-xl border border-white/20 dark:border-primary/10 rounded-[32px] p-8 shadow-[0_20px_60px_-15px_rgba(78,155,99,0.15)] relative overflow-hidden">
+            {/* Subtle inner gradient decoration */}
+            <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full filter blur-2xl -mr-10 -mt-10 pointer-events-none" />
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <h1 className="text-2xl font-extrabold text-hero-title text-center mb-2">Create Account</h1>
+            <p className="text-text-secondary font-medium text-center mb-8">Join DocAppoint today</p>
+
+            <form onSubmit={handleSubmit} className="space-y-5 relative z-10">
               <div>
-                <label className="block text-sm font-medium text-[#DDF1D8] mb-1">Full Name</label>
+                <label className="block text-sm font-semibold text-text-main mb-1.5 ml-1">Full Name</label>
                 <div className="relative">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
                   <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-[16px] bg-white/10 border border-white/10 focus:border-[#4E9B63]/50 focus:bg-white/15 focus:ring-4 focus:ring-[#4E9B63]/20 outline-none transition-all text-white placeholder:text-white/40"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-bg-main/60 border border-primary/10 focus:border-accent focus:bg-bg-card focus:ring-4 focus:ring-accent/15 outline-none transition-all text-text-main font-medium placeholder:text-text-secondary/50"
                     placeholder="Enter your full name"
                     required
                   />
@@ -135,14 +138,14 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#DDF1D8] mb-1">Email</label>
+                <label className="block text-sm font-semibold text-text-main mb-1.5 ml-1">Email</label>
                 <div className="relative">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
                   <input
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-[16px] bg-white/10 border border-white/10 focus:border-[#4E9B63]/50 focus:bg-white/15 focus:ring-4 focus:ring-[#4E9B63]/20 outline-none transition-all text-white placeholder:text-white/40"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-bg-main/60 border border-primary/10 focus:border-accent focus:bg-bg-card focus:ring-4 focus:ring-accent/15 outline-none transition-all text-text-main font-medium placeholder:text-text-secondary/50"
                     placeholder="Enter your email"
                     required
                   />
@@ -150,23 +153,23 @@ export default function RegisterPage() {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#DDF1D8] mb-1">Photo URL (Optional)</label>
+                <label className="block text-sm font-semibold text-text-main mb-1.5 ml-1">Photo URL (Optional)</label>
                 <div className="relative">
-                  <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                  <ImageIcon className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
                   <input
                     type="url"
                     value={photoURL}
                     onChange={(e) => setPhotoURL(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 rounded-[16px] bg-white/10 border border-white/10 focus:border-[#4E9B63]/50 focus:bg-white/15 focus:ring-4 focus:ring-[#4E9B63]/20 outline-none transition-all text-white placeholder:text-white/40"
+                    className="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-bg-main/60 border border-primary/10 focus:border-accent focus:bg-bg-card focus:ring-4 focus:ring-accent/15 outline-none transition-all text-text-main font-medium placeholder:text-text-secondary/50"
                     placeholder="https://example.com/photo.jpg"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-[#DDF1D8] mb-1">Password</label>
+                <label className="block text-sm font-semibold text-text-main mb-1.5 ml-1">Password</label>
                 <div className="relative">
-                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-white/40" />
+                  <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-text-secondary" />
                   <input
                     type={showPassword ? 'text' : 'password'}
                     value={password}
@@ -174,8 +177,8 @@ export default function RegisterPage() {
                       setPassword(e.target.value);
                       setPasswordError(validatePassword(e.target.value));
                     }}
-                    className={`w-full pl-12 pr-12 py-3 rounded-[16px] bg-white/10 outline-none transition-all text-white placeholder:text-white/40 ${
-                      passwordError && password ? 'border border-red-400 focus:border-red-400 focus:bg-white/15 focus:ring-4 focus:ring-red-400/20' : 'border border-white/10 focus:border-[#4E9B63]/50 focus:bg-white/15 focus:ring-4 focus:ring-[#4E9B63]/20'
+                    className={`w-full pl-12 pr-12 py-3.5 rounded-2xl bg-bg-main/60 outline-none transition-all text-text-main font-medium placeholder:text-text-secondary/50 ${
+                      passwordError && password ? 'border border-red-400 focus:border-red-400 focus:bg-bg-card focus:ring-4 focus:ring-red-400/20' : 'border border-primary/10 focus:border-accent focus:bg-bg-card focus:ring-4 focus:ring-accent/15'
                     }`}
                     placeholder="Create a password"
                     required
@@ -183,7 +186,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-white/40 hover:text-white/80 transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-primary/40 hover:text-primary transition-colors"
                   >
                     {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
                   </button>
@@ -191,7 +194,7 @@ export default function RegisterPage() {
                 {passwordError && password && (
                   <p className="mt-1 text-sm text-red-400">{passwordError}</p>
                 )}
-                <p className="mt-1 text-xs text-white/40">
+                <p className="mt-1 text-xs text-text-secondary">
                   Must contain 1 uppercase, 1 lowercase, and be at least 6 characters
                 </p>
               </div>
@@ -209,16 +212,16 @@ export default function RegisterPage() {
 
             <div className="relative my-6">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10" />
+                <div className="w-full border-t border-primary/10" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-[#11281F] text-[#DDF1D8]/60">Or sign up with</span>
+                <span className="px-4 bg-bg-card text-text-secondary">Or sign up with</span>
               </div>
             </div>
 
             <button
               onClick={handleGoogleSignup}
-              className="w-full py-3 rounded-[16px] bg-white/5 border border-white/10 text-white font-medium hover:bg-white/10 transition-all flex items-center justify-center gap-3"
+              className="w-full py-3 rounded-[16px] bg-bg-main/50 border border-primary/10 text-text-main font-medium hover:bg-bg-main transition-all flex items-center justify-center gap-3"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>
@@ -229,9 +232,9 @@ export default function RegisterPage() {
               Continue with Google
             </button>
 
-            <p className="text-center mt-6 text-sm text-[#DDF1D8]/80">
+            <p className="text-center mt-6 text-sm text-text-secondary">
               Already have an account?{' '}
-              <Link href="/login" className="text-[#B5E3B0] hover:text-white font-medium transition-colors">
+              <Link href="/login" className="text-accent hover:text-accent-hover font-medium transition-colors">
                 Login
               </Link>
             </p>

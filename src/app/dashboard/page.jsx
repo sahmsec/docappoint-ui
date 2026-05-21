@@ -42,6 +42,14 @@ export default function DashboardPage() {
     const timer = setTimeout(() => {
       setIsInitialLoad(false);
     }, 800);
+    
+    // Check URL for active tab
+    const params = new URLSearchParams(window.location.search);
+    const tab = params.get('tab');
+    if (tab) {
+      setActiveTab(tab);
+    }
+    
     return () => clearTimeout(timer);
   }, []);
 
@@ -156,42 +164,66 @@ export default function DashboardPage() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="fixed inset-0 z-[9999] bg-[#11281F] flex items-center justify-center"
+            className="fixed inset-0 z-[9999] bg-bg-main flex items-center justify-center"
           >
             <Loader />
           </motion.div>
         )}
       </AnimatePresence>
 
-      <div className="min-h-screen bg-[#F4FAF2] relative overflow-hidden">
+      <div className="min-h-screen bg-bg-main relative overflow-hidden">
         {/* Dark Hero Header */}
-        <div className="bg-[#11281F] pt-32 pb-20 relative overflow-hidden">
+        <div className="pt-32 pb-20 relative overflow-hidden transition-all duration-300" style={{ background: 'var(--hero-bg)' }}>
           {/* Ambient green glows */}
           <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[60%] bg-[#B5E3B0]/15 rounded-full filter blur-[120px] pointer-events-none" />
           <div className="absolute bottom-[-10%] right-[-10%] w-[45%] h-[60%] bg-[#4E9B63]/10 rounded-full filter blur-[120px] pointer-events-none" />
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             {/* Header Title */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mb-8"
-            >
-              <span className="px-4 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#B5E3B0] text-sm font-medium tracking-wide uppercase">
-                Patient Portal
-              </span>
-              <h1 className="text-4xl font-bold text-white mt-4">Welcome Back, {user.name}</h1>
-              <p className="text-[#DDF1D8]/80 mt-1">Manage your appointments, health bookings, and profile</p>
-            </motion.div>
+            <div className="mb-8 flex flex-col items-center text-center">
+              <div className="overflow-hidden mb-4 pb-1">
+                <motion.span
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.6, delay: isInitialLoad ? 0.8 : 0, ease: "easeOut" }}
+                  className="inline-block px-4 py-1.5 rounded-full bg-bg-card/40 border border-primary/10 text-accent text-sm font-medium tracking-wide uppercase"
+                >
+                  Patient Portal
+                </motion.span>
+              </div>
+              <div className="overflow-hidden pb-1 lg:pb-2">
+                <motion.h1
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.7, delay: isInitialLoad ? 0.9 : 0.1, ease: "easeOut" }}
+                  className="text-4xl font-bold text-hero-title inline-block"
+                >
+                  Welcome Back, {user.name}
+                </motion.h1>
+              </div>
+              <div className="overflow-hidden mt-1">
+                <motion.p
+                  initial={{ y: "100%" }}
+                  whileInView={{ y: "0%" }}
+                  viewport={{ once: false }}
+                  transition={{ duration: 0.7, delay: isInitialLoad ? 1.0 : 0.2, ease: "easeOut" }}
+                  className="text-hero-text inline-block"
+                >
+                  Manage your appointments, health bookings, and profile
+                </motion.p>
+              </div>
+            </div>
 
             {/* Tabs */}
-            <div className="flex gap-3">
+            <div className="flex justify-center gap-3">
               <button
                 onClick={() => setActiveTab('bookings')}
                 className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 border ${
                   activeTab === 'bookings'
-                    ? 'bg-[#4E9B63] text-white border-[#4E9B63] shadow-lg shadow-[#4E9B63]/25'
-                    : 'bg-white/5 backdrop-blur-md text-[#DDF1D8]/85 border-white/10 hover:bg-white/10'
+                    ? 'bg-primary text-bg-main border-primary shadow-lg shadow-primary/25'
+                    : 'bg-bg-card/40 backdrop-blur-md text-hero-text border-primary/10 hover:bg-bg-card/60'
                 }`}
               >
                 <Calendar className="w-4 h-4" />
@@ -201,8 +233,8 @@ export default function DashboardPage() {
                 onClick={() => setActiveTab('profile')}
                 className={`px-6 py-3 rounded-2xl font-semibold transition-all duration-300 flex items-center gap-2 border ${
                   activeTab === 'profile'
-                    ? 'bg-[#4E9B63] text-white border-[#4E9B63] shadow-lg shadow-[#4E9B63]/25'
-                    : 'bg-white/5 backdrop-blur-md text-[#DDF1D8]/85 border-white/10 hover:bg-white/10'
+                    ? 'bg-primary text-bg-main border-primary shadow-lg shadow-primary/25'
+                    : 'bg-bg-card/40 backdrop-blur-md text-hero-text border-primary/10 hover:bg-bg-card/60'
                 }`}
               >
                 <User className="w-4 h-4" />
@@ -213,8 +245,8 @@ export default function DashboardPage() {
         </div>
 
         {/* Curved Transition */}
-        <div className="bg-[#11281F] -mt-1 h-12 w-full relative z-20">
-          <div className="h-full w-full bg-[#F4FAF2] rounded-t-[48px] md:rounded-t-[80px]" />
+        <div className="-mt-1 h-12 w-full relative z-20 transition-all duration-300" style={{ background: 'var(--hero-bg)' }}>
+          <div className="h-full w-full bg-bg-main rounded-t-[48px] md:rounded-t-[80px]" />
         </div>
 
         {/* Content Area */}
@@ -232,27 +264,27 @@ export default function DashboardPage() {
                 <Loader />
               </div>
             ) : bookings.length === 0 ? (
-              <div className="text-center py-20 bg-white border border-[#EAF7E8] shadow-[0_8px_30px_rgb(78,155,99,0.05)] rounded-[32px] p-8 max-w-2xl mx-auto">
-                <Calendar className="w-16 h-16 text-[#4E9B63]/40 mx-auto mb-4" />
-                <h3 className="text-2xl font-bold text-[#11281F] mb-2">No Appointments Yet</h3>
-                <p className="text-slate-500 mb-6 max-w-md mx-auto">Book your first appointment with a medical specialist today and start your wellness journey.</p>
+              <div className="text-center py-20 bg-bg-card border border-border shadow-[0_8px_30px_rgb(78,155,99,0.05)] rounded-[32px] p-8 max-w-2xl mx-auto">
+                <Calendar className="w-16 h-16 text-accent/40 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold text-primary mb-2">No Appointments Yet</h3>
+                <p className="text-text-secondary mb-6 max-w-md mx-auto">Book your first appointment with a medical specialist today and start your wellness journey.</p>
                 <button
                   onClick={() => router.push('/appointments')}
-                  className="px-8 py-3.5 rounded-2xl bg-[#4E9B63] text-white font-bold hover:bg-[#3D8551] transition-all shadow-lg shadow-[#4E9B63]/20 hover:scale-[1.02] active:scale-[0.98]"
+                  className="px-8 py-3.5 rounded-2xl bg-primary text-bg-main font-bold hover:bg-primary-hover transition-all shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98]"
                 >
                   Browse Doctors
                 </button>
               </div>
             ) : (
-              <div className="bg-white/80 border border-white/60 p-8 rounded-[32px] shadow-[0_20px_50px_rgba(78,155,99,0.06)] backdrop-blur-md">
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+              <div className="bg-bg-card/80 border border-border/50 p-8 rounded-[32px] shadow-[0_20px_50px_rgba(78,155,99,0.04)] backdrop-blur-md">
+                <div className="flex flex-col gap-6">
                   {bookings.map((booking, index) => (
                     <motion.div
                       key={booking._id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="flex justify-center w-full"
+                      className="w-full"
                     >
                       <Dashboard3DCard
                         booking={booking}
@@ -275,39 +307,39 @@ export default function DashboardPage() {
             transition={{ duration: 0.3 }}
           >
             <div className="max-w-2xl mx-auto">
-              <div className="bg-white border border-[#EAF7E8] rounded-[32px] p-8 shadow-[0_20px_50px_rgba(78,155,99,0.06)]">
-                <div className="flex items-center gap-6 mb-8 pb-8 border-b border-slate-100">
+              <div className="bg-bg-card border border-border rounded-[32px] p-8 shadow-[0_20px_50px_rgba(78,155,99,0.06)]">
+                <div className="flex items-center gap-6 mb-8 pb-8 border-b border-border">
                   <UserAvatar
                     src={user.photoURL}
                     name={user.name}
                     size="lg"
                     className="border-4 border-[#B5E3B0]/40 shadow-md"
-                    fallbackClassName="bg-gradient-to-tr from-[#4E9B63] to-[#B5E3B0] border-4 border-[#B5E3B0]/40 shadow-md"
+                    fallbackClassName="bg-gradient-to-tr from-accent to-[#B5E3B0] border-4 border-[#B5E3B0]/40 shadow-md"
                   />
                   <div>
-                    <h2 className="text-2xl font-bold text-[#11281F]">{user.name}</h2>
-                    <p className="text-slate-500">{user.email}</p>
+                    <h2 className="text-2xl font-bold text-primary">{user.name}</h2>
+                    <p className="text-text-secondary">{user.email}</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
-                  <div className="p-4 rounded-2xl bg-[#F4FAF2] border border-[#EAF7E8]">
-                    <label className="text-xs text-slate-400 font-medium block mb-1">Full Name</label>
-                    <p className="font-semibold text-[#11281F]">{user.name}</p>
+                  <div className="p-4 rounded-2xl bg-bg-main border border-border">
+                    <label className="text-xs text-text-secondary font-medium block mb-1">Full Name</label>
+                    <p className="font-semibold text-primary">{user.name}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-[#F4FAF2] border border-[#EAF7E8]">
-                    <label className="text-xs text-slate-400 font-medium block mb-1">Email Address</label>
-                    <p className="font-semibold text-[#11281F]">{user.email}</p>
+                  <div className="p-4 rounded-2xl bg-bg-main border border-border">
+                    <label className="text-xs text-text-secondary font-medium block mb-1">Email Address</label>
+                    <p className="font-semibold text-primary">{user.email}</p>
                   </div>
-                  <div className="p-4 rounded-2xl bg-[#F4FAF2] border border-[#EAF7E8]">
-                    <label className="text-xs text-slate-400 font-medium block mb-1">Profile Photo</label>
-                    <p className="font-semibold text-[#11281F] truncate">{user.photoURL || 'Not set'}</p>
+                  <div className="p-4 rounded-2xl bg-bg-main border border-border">
+                    <label className="text-xs text-text-secondary font-medium block mb-1">Profile Photo</label>
+                    <p className="font-semibold text-primary truncate">{user.photoURL || 'Not set'}</p>
                   </div>
                 </div>
 
                 <button
                   onClick={openProfileModal}
-                  className="mt-8 w-full py-4 rounded-2xl bg-[#4E9B63] text-white font-bold hover:bg-[#3D8551] transition-all shadow-lg shadow-[#4E9B63]/25 flex items-center justify-center gap-2 hover:scale-[1.01]"
+                  className="mt-8 w-full py-4 rounded-2xl bg-primary text-bg-main font-bold hover:bg-primary-hover transition-all shadow-lg shadow-primary/25 flex items-center justify-center gap-2 hover:scale-[1.01]"
                 >
                   <Edit2 className="w-5 h-5" />
                   Update Profile
@@ -333,40 +365,40 @@ export default function DashboardPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white border border-[#EAF7E8] rounded-[32px] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
+              className="bg-bg-card border border-border rounded-[32px] shadow-2xl w-full max-w-lg max-h-[90vh] overflow-y-auto"
             >
-              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-[#11281F]">Update Appointment</h2>
-                <button onClick={() => setShowEditModal(false)} className="p-2 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-[#11281F] transition-colors">
+              <div className="p-6 border-b border-border flex items-center justify-between">
+                <h2 className="text-xl font-bold text-primary">Update Appointment</h2>
+                <button onClick={() => setShowEditModal(false)} className="p-2 rounded-xl hover:bg-bg-soft/30 text-text-secondary hover:text-primary transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <form onSubmit={handleUpdate} className="p-6 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Doctor</label>
-                  <input type="text" value={selectedBooking.doctorName} disabled className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed" />
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Doctor</label>
+                  <input type="text" value={selectedBooking.doctorName} disabled className="w-full px-4 py-3 rounded-2xl border border-border bg-bg-main text-text-secondary cursor-not-allowed" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Your Email</label>
-                  <input type="email" value={user.email} disabled className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-slate-50 text-slate-400 cursor-not-allowed" />
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Your Email</label>
+                  <input type="email" value={user.email} disabled className="w-full px-4 py-3 rounded-2xl border border-border bg-bg-main text-text-secondary cursor-not-allowed" />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Patient Name</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Patient Name</label>
                   <input
                     type="text"
                     value={editForm.patientName}
                     onChange={(e) => setEditForm({ ...editForm, patientName: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Gender</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Gender</label>
                   <select
                     value={editForm.gender}
                     onChange={(e) => setEditForm({ ...editForm, gender: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all bg-bg-card"
                   >
                     <option value="Male">Male</option>
                     <option value="Female">Female</option>
@@ -374,32 +406,32 @@ export default function DashboardPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Phone</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Phone</label>
                   <input
                     type="tel"
                     value={editForm.phone}
                     onChange={(e) => setEditForm({ ...editForm, phone: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Appointment Date</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Appointment Date</label>
                   <input
                     type="date"
                     value={editForm.appointmentDate}
                     onChange={(e) => setEditForm({ ...editForm, appointmentDate: e.target.value })}
                     min={new Date().toISOString().split('T')[0]}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Appointment Time</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Appointment Time</label>
                   <select
                     value={editForm.appointmentTime}
                     onChange={(e) => setEditForm({ ...editForm, appointmentTime: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all bg-white"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all bg-bg-card"
                     required
                   >
                     <option value="09:00 AM">09:00 AM</option>
@@ -416,7 +448,7 @@ export default function DashboardPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-4 rounded-2xl bg-[#4E9B63] text-white font-bold hover:bg-[#3D8551] transition-all shadow-lg shadow-[#4E9B63]/25 disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-[1.01]"
+                  className="w-full py-4 rounded-2xl bg-primary text-bg-main font-bold hover:bg-primary-hover transition-all shadow-lg shadow-primary/25 disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-[1.01]"
                 >
                   {submitting ? (
                     <>
@@ -451,33 +483,33 @@ export default function DashboardPage() {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               onClick={(e) => e.stopPropagation()}
-              className="bg-white border border-[#EAF7E8] rounded-[32px] shadow-2xl w-full max-w-md"
+              className="bg-bg-card border border-border rounded-[32px] shadow-2xl w-full max-w-md"
             >
-              <div className="p-6 border-b border-slate-100 flex items-center justify-between">
-                <h2 className="text-xl font-bold text-[#11281F]">Update Profile</h2>
-                <button onClick={() => setShowProfileModal(false)} className="p-2 rounded-xl hover:bg-slate-100 text-slate-500 hover:text-[#11281F] transition-colors">
+              <div className="p-6 border-b border-border flex items-center justify-between">
+                <h2 className="text-xl font-bold text-primary">Update Profile</h2>
+                <button onClick={() => setShowProfileModal(false)} className="p-2 rounded-xl hover:bg-bg-soft/30 text-text-secondary hover:text-primary transition-colors">
                   <X className="w-5 h-5" />
                 </button>
               </div>
 
               <form onSubmit={handleProfileUpdate} className="p-6 space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Name</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Name</label>
                   <input
                     type="text"
                     value={profileForm.name}
                     onChange={(e) => setProfileForm({ ...profileForm, name: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all bg-bg-main text-text-main"
                     required
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-slate-600 mb-1">Photo URL</label>
+                  <label className="block text-sm font-medium text-text-secondary mb-1">Photo URL</label>
                   <input
                     type="url"
                     value={profileForm.photoURL}
                     onChange={(e) => setProfileForm({ ...profileForm, photoURL: e.target.value })}
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-[#4E9B63] focus:ring-4 focus:ring-[#4E9B63]/10 outline-none transition-all"
+                    className="w-full px-4 py-3 rounded-2xl border border-border focus:border-accent focus:ring-4 focus:ring-accent/10 outline-none transition-all bg-bg-main text-text-main"
                     placeholder="https://example.com/photo.jpg"
                   />
                 </div>
@@ -485,7 +517,7 @@ export default function DashboardPage() {
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full py-4 rounded-2xl bg-[#4E9B63] text-white font-bold hover:bg-[#3D8551] transition-all shadow-lg shadow-[#4E9B63]/25 disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-[1.01]"
+                  className="w-full py-4 rounded-2xl bg-primary text-bg-main font-bold hover:bg-primary-hover transition-all shadow-lg shadow-primary/25 disabled:opacity-50 flex items-center justify-center gap-2 hover:scale-[1.01]"
                 >
                   {submitting ? (
                     <>

@@ -8,28 +8,28 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0fdf4',
-          100: '#dcfce7',
-          200: '#bbf7d0',
-          300: '#86efac',
-          400: '#4ade80',
-          500: '#11281F', // Medium Emerald
-          600: '#059669', // Accent Green secondary
-          700: '#11281F', // Wellness Green
-          800: '#11281F', // Deep Forest Green
-          900: '#062519',
-        },
-        mint: {
-          50: '#F7F7F4', // Warm Off White
-          100: '#DDF1D8', // Soft Mint Green
-          200: '#E5E7EB',
-          300: '#cbd5e1',
-          400: '#94a3b8',
-          500: '#DDF1D8',
-        },
-        dark: '#111111', // Near Black
-        card: '#FFFFFF', // Pure White
+        'bg-main': 'var(--bg-main)',
+        'bg-soft': 'var(--bg-soft)',
+        'bg-card': 'var(--bg-card)',
+        'primary': 'var(--primary)',
+        'primary-hover': 'var(--primary-hover)',
+        'accent': 'var(--accent)',
+        'text-main': 'var(--text-main)',
+        'text-secondary': 'var(--text-secondary)',
+        'border': 'var(--border)',
+        'hero-bg': 'var(--hero-bg)',
+        'hero-title': 'var(--hero-title)',
+        'hero-text': 'var(--hero-text)',
+        'hero-badge-text': 'var(--hero-badge-text)',
+        'hero-highlight': 'var(--hero-highlight)',
+        'footer-bg': 'var(--footer-bg)',
+        'footer-text': 'var(--footer-text)',
+        'footer-text-secondary': 'var(--footer-text-secondary)',
+        'footer-title': 'var(--footer-title)',
+        'footer-border': 'var(--footer-border)',
+        'footer-icon-bg': 'var(--footer-icon-bg)',
+        'footer-icon-hover-bg': 'var(--footer-icon-hover-bg)',
+        'navbar-bg': 'var(--navbar-bg)',
       },
       fontFamily: {
         sans: ['Inter', 'system-ui', 'sans-serif'],

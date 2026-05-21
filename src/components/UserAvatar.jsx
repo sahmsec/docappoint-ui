@@ -62,7 +62,7 @@ export default function UserAvatar({
   return (
     <div
       aria-label={name || 'User avatar'}
-      className={`${avatarSizeClass} shrink-0 rounded-full bg-[#11281F] text-white flex items-center justify-center font-semibold ${fallbackClassName}`.trim()}
+      className={`${avatarSizeClass} shrink-0 rounded-full bg-primary text-white flex items-center justify-center font-semibold ${fallbackClassName}`.trim()}
     >
       {initials ? <span>{initials}</span> : <User className={iconSizeClass} />}
     </div>

@@ -1,58 +1,70 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { Home, Search, Calendar } from 'lucide-react';
+import AnimatedButton from '@/components/AnimatedButton';
 
 export default function NotFoundPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-mint-50 to-white flex items-center justify-center px-4">
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center max-w-lg"
-      >
-        {/* Animated 404 */}
-        <motion.div
-          animate={{ 
-            y: [0, -10, 0],
-          }}
-          transition={{ 
-            duration: 3, 
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="mb-8"
+    <div className="min-h-screen bg-bg-main flex items-center justify-center p-6 lg:p-12 transition-colors duration-300 relative overflow-hidden">
+      
+      {/* Ambient Glows to perfectly match the background vibe of other pages */}
+      <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[50%] bg-[#B5E3B0]/15 rounded-full filter blur-[120px] pointer-events-none z-0" />
+      <div className="absolute bottom-[-20%] right-[-10%] w-[40%] h-[50%] bg-accent/10 rounded-full filter blur-[120px] pointer-events-none z-0" />
+
+      <div className="max-w-7xl w-full flex flex-col md:flex-row items-center justify-center gap-12 lg:gap-24 mt-16 md:mt-0 relative z-10">
+        
+        {/* Left Side: Animated Image */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="w-full md:w-1/2 flex justify-center md:justify-end"
         >
-          <div className="w-32 h-32 mx-auto rounded-3xl bg-gradient-to-br from-primary-100 to-primary-200 flex items-center justify-center mb-6">
-            <Search className="w-16 h-16 text-primary-600" />
-          </div>
+          {/* Increased size significantly (max-w-lg to max-w-2xl) */}
+          <motion.div
+            animate={{ y: [0, -15, 0] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+            className="relative w-full max-w-[350px] md:max-w-lg lg:max-w-xl xl:max-w-2xl aspect-square"
+          >
+            <Image
+              src="/doctor-404.svg"
+              alt="404 Illustration"
+              fill
+              className="object-contain drop-shadow-2xl"
+              priority
+            />
+          </motion.div>
         </motion.div>
 
-        <h1 className="text-7xl font-bold gradient-text mb-4">404</h1>
-        <h2 className="text-2xl font-bold text-slate-900 mb-3">Page Not Found</h2>
-        <p className="text-slate-500 mb-8 leading-relaxed">
-          The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.
-        </p>
+        {/* Right Side: Text and Button (Perfectly centered as requested) */}
+        <motion.div 
+          initial={{ opacity: 0, x: 50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+          className="w-full md:w-1/2 flex flex-col items-center text-center"
+        >
+          {/* Huge 404 Text - Primary color with a glassy 3D gradient/shadow effect */}
+          <h1 
+            className="text-[120px] lg:text-[180px] font-black leading-none text-transparent bg-clip-text bg-gradient-to-b from-primary via-primary/80 to-primary/30 tracking-[0.1em] mb-4"
+            style={{ filter: 'drop-shadow(0px 10px 15px rgba(0,0,0,0.15)) drop-shadow(0px 4px 6px rgba(0,0,0,0.1))' }}
+          >
+            404
+          </h1>
+          
+          <p className="text-xl md:text-2xl font-semibold text-text-secondary mb-10 max-w-sm mt-2">
+            Looks like this page is still in the waiting room!
+          </p>
 
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link
+          <AnimatedButton
+            text="Go Back"
             href="/"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-bold hover:from-primary-600 hover:to-primary-700 transition-all shadow-lg shadow-primary-500/30"
-          >
-            <Home className="w-5 h-5" />
-            Back to Home
-          </Link>
-          <Link
-            href="/appointments"
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl border-2 border-slate-200 text-slate-700 font-medium hover:border-primary-500 hover:text-primary-600 transition-all"
-          >
-            <Calendar className="w-5 h-5" />
-            Browse Doctors
-          </Link>
-        </div>
-      </motion.div>
+            variant="dark"
+            className="!py-4 !px-12"
+          />
+        </motion.div>
+      </div>
     </div>
   );
 }

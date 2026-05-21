@@ -35,7 +35,7 @@ const StyledWrapper = styled.div`
     position: absolute;
     width: 50px;
     height: 25px;
-    background-color: #4E9B63; /* vibrant accent green */
+    background-color: var(--accent); /* vibrant accent green */
     border-radius: 100px 100px 0 0;
     transform: translate(-50%, -50%);
     animation: pac-top 0.5s linear infinite;
@@ -47,7 +47,7 @@ const StyledWrapper = styled.div`
     position: absolute;
     width: 50px;
     height: 25px;
-    background-color: #4E9B63; /* vibrant accent green */
+    background-color: var(--accent); /* vibrant accent green */
     border-radius: 0 0 100px 100px;
     transform: translate(-50%, 50%);
     animation: pac-bot 0.5s linear infinite;
@@ -89,7 +89,7 @@ const StyledWrapper = styled.div`
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #4E9B63; /* vibrant accent green */
+    background: var(--accent); /* vibrant accent green */
   }
 
   .dots .dot:nth-child(1) {
