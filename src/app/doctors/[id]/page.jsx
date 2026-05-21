@@ -370,7 +370,7 @@ export default function DoctorDetailsPage() {
                     </div>
                     <div>
                       <div className="text-xs font-bold text-text-secondary uppercase tracking-widest">Consult Fee</div>
-                      <div className="text-base font-extrabold text-primary mt-1">৳{doctor.fee}</div>
+                      <div className="text-base font-extrabold text-primary mt-1">${doctor.fee}</div>
                     </div>
                   </div>
                 </motion.div>
@@ -489,7 +489,7 @@ export default function DoctorDetailsPage() {
 
                   <div className="text-center pb-6 border-b border-dashed border-primary/10 relative">
                     <div className="text-xs font-bold text-accent uppercase tracking-widest mb-1.5">Consultation Charge</div>
-                    <div className="text-4xl font-black text-primary tracking-tight">৳{doctor.fee}</div>
+                    <div className="text-4xl font-black text-primary tracking-tight">${doctor.fee}</div>
                     <div className="text-xs font-semibold text-text-secondary mt-1.5">including complete clinical session</div>
                   </div>
 
@@ -569,7 +569,7 @@ export default function DoctorDetailsPage() {
                   </div>
                   <div>
                     <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest">Consultation Charge</div>
-                    <div className="text-sm font-extrabold text-accent mt-0.5">৳{doctor?.fee}</div>
+                    <div className="text-sm font-extrabold text-accent mt-0.5">${doctor?.fee}</div>
                   </div>
                 </div>
 

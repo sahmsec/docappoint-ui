@@ -92,7 +92,7 @@ const DoctorCard = ({ doctor }) => {
                 </div>
                 <div className="detail-row">
                   <span className="detail-label">Fee:</span>
-                  <span className="detail-val font-bold highlight-text">৳{doctor.fee}</span>
+                  <span className="detail-val font-bold highlight-text">${doctor.fee}</span>
                 </div>
               </div>
 

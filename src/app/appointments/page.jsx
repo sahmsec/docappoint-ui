@@ -221,7 +221,7 @@ export default function AllAppointmentsPage() {
                   <div className="flex items-center justify-between mt-auto">
                     <div className="flex flex-col">
                       <span className="text-[10px] uppercase font-bold text-primary tracking-wider">Fee</span>
-                      <span className="text-lg font-bold text-text-main leading-tight">৳{doctor.fee}</span>
+                      <span className="text-lg font-bold text-text-main leading-tight">${doctor.fee}</span>
                     </div>
                     <AnimatedButton
                       text="View Details"
