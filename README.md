@@ -4,7 +4,7 @@
 
 ## Live Site
 
-🌐 [https://docappoint.vercel.app](https://docappoint.vercel.app)
+🌐 [docappoint-psi.vercel.app](docappoint-psi.vercel.app)
 
 ## Features
 
